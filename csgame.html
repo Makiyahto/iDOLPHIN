@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSS Quiz Game</title>
+  <link rel="stylesheet" href="e-li.css" />
+  <style>
+    .quiz-box {
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .choices button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56,189,248,0.4);
+      border-radius: 10px;
+      color: #e5f0ff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .choices button:hover {
+      background: rgba(56,189,248,0.2);
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #7dd3fc;
+    }
+
+    #retakeBtn {
+      display: none;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #38bdf8;
+      border: none;
+      color: #020f2f;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🎮 CSS Quiz Game</h1>
+  <p>Test Your CSS Knowledge</p>
+</header>
+
+<div class="container">
+  <div class="card quiz-box">
+    <h2 id="question">Question here</h2>
+
+    <div class="choices">
+      <button onclick="checkAnswer('a')" id="a"></button>
+      <button onclick="checkAnswer('b')" id="b"></button>
+      <button onclick="checkAnswer('c')" id="c"></button>
+      <button onclick="checkAnswer('d')" id="d"></button>
+    </div>
+
+    <div class="result" id="result"></div>
+    <button id="retakeBtn" onclick="resetQuiz()">🔁 Retake Quiz</button>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 E-Library | CSS Practice Game</p>
+</footer>
+
+<script>
+const quiz = [
+  {question:"What does CSS stand for?",a:"Cascading Style Sheets",b:"Creative Style System",c:"Computer Style Sheets",d:"Colorful Style Sheets",correct:"a"},
+  {question:"Which property changes text color?",a:"font-color",b:"text-color",c:"color",d:"style",correct:"c"},
+  {question:"Which symbol selects a class?",a:"#",b:".",c:"*",d:"&",correct:"b"},
+  {question:"Which symbol selects an ID?",a:".",b:"*",c:"#",d:"%",correct:"c"},
+  {question:"Which property sets background color?",a:"bgcolor",b:"background-style",c:"background-color",d:"color",correct:"c"},
+  {question:"Which unit is relative to font size?",a:"px",b:"em",c:"cm",d:"mm",correct:"b"},
+  {question:"Which layout is one-dimensional?",a:"Grid",b:"Table",c:"Flexbox",d:"Float",correct:"c"},
+  {question:"Which layout is two-dimensional?",a:"Flexbox",b:"Grid",c:"Block",d:"Inline",correct:"b"},
+  {question:"Which property adds space inside border?",a:"margin",b:"padding",c:"border",d:"outline",correct:"b"},
+  {question:"Which property adds space outside border?",a:"padding",b:"border",c:"margin",d:"spacing",correct:"c"},
+
+  {question:"Which property makes text bold?",a:"font-style",b:"font-weight",c:"text-bold",d:"weight",correct:"b"},
+  {question:"Which property centers text?",a:"align",b:"text-align",c:"font-align",d:"center",correct:"b"},
+  {question:"Which property sets font?",a:"font-family",b:"text-style",c:"font-type",d:"family",correct:"a"},
+  {question:"Which pseudo-class works on hover?",a:"::hover",b:":hover",c:"hover()",d:":mouse",correct:"b"},
+  {question:"Which property hides overflow?",a:"hidden",b:"overflow",c:"overflow:hidden",d:"display:none",correct:"c"},
+  {question:"Which value hides element but keeps space?",a:"display:none",b:"opacity:0",c:"visibility:hidden",d:"hidden",correct:"c"},
+  {question:"Which property controls position?",a:"layout",b:"position",c:"float",d:"align",correct:"b"},
+  {question:"Which value fixes element on screen?",a:"absolute",b:"fixed",c:"relative",d:"sticky",correct:"b"},
+  {question:"Which property creates smooth effects?",a:"animation",b:"transition",c:"transform",d:"motion",correct:"b"},
+  {question:"Which rule is used for responsiveness?",a:"@screen",b:"@media",c:"@device",d:"@responsive",correct:"b"},
+
+  {question:"Which property rounds corners?",a:"border-style",b:"border-radius",c:"corner",d:"round",correct:"b"},
+  {question:"Which property adds shadow?",a:"box-shadow",b:"text-shadow",c:"shadow",d:"drop-shadow",correct:"a"},
+  {question:"Which display value removes element?",a:"hidden",b:"none",c:"block",d:"inline",correct:"b"},
+  {question:"Which property changes cursor?",a:"mouse",b:"cursor",c:"pointer",d:"hover",correct:"b"},
+  {question:"Which unit equals viewport width?",a:"vh",b:"vw",c:"%",d:"em",correct:"b"},
+  {question:"Which property controls layer order?",a:"index",b:"z-index",c:"stack",d:"layer",correct:"b"},
+  {question:"Which property sets transparency?",a:"opacity",b:"alpha",c:"transparent",d:"visibility",correct:"a"},
+  {question:"Which pseudo-element adds content?",a:":before",b:"::before",c:"before()",d:"content()",correct:"b"},
+  {question:"Which flex property aligns items?",a:"align-items",b:"justify",c:"flex-align",d:"align",correct:"a"},
+  {question:"Which grid property defines columns?",a:"grid-row",b:"grid-template-columns",c:"grid-column",d:"columns",correct:"b"}
+];
+
+let current = 0;
+let score = 0;
+
+const questionEl = document.getElementById("question");
+const resultEl = document.getElementById("result");
+const retakeBtn = document.getElementById("retakeBtn");
+
+function loadQuestion() {
+  const q = quiz[current];
+  questionEl.textContent = q.question;
+  a.textContent = q.a;
+  b.textContent = q.b;
+  c.textContent = q.c;
+  d.textContent = q.d;
+  resultEl.textContent = "";
+}
+
+function checkAnswer(ans) {
+  if (ans === quiz[current].correct) {
+    score++;
+    resultEl.textContent = "✅ Correct!";
+  } else {
+    resultEl.textContent = "❌ Wrong answer";
+  }
+
+  current++;
+
+  setTimeout(() => {
+    if (current < quiz.length) {
+      loadQuestion();
+    } else {
+      questionEl.textContent = "Game Over 🎉";
+      document.querySelector(".choices").innerHTML = "";
+      resultEl.textContent = `Your Score: ${score} / ${quiz.length}`;
+      retakeBtn.style.display = "inline-block";
+    }
+  }, 800);
+}
+
+function resetQuiz() {
+  current = 0;
+  score = 0;
+  document.querySelector(".choices").innerHTML = `
+    <button onclick="checkAnswer('a')" id="a"></button>
+    <button onclick="checkAnswer('b')" id="b"></button>
+    <button onclick="checkAnswer('c')" id="c"></button>
+    <button onclick="checkAnswer('d')" id="d"></button>
+  `;
+  retakeBtn.style.display = "none";
+  loadQuestion();
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>

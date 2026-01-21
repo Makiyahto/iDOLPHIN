@@ -1,0 +1,277 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg-main: linear-gradient(135deg, #020617, #020f2f);
+  --bg-header: linear-gradient(90deg, #0ea5e9, #2563eb);
+  --bg-nav: rgba(15, 23, 42, 0.9);
+  --bg-card: rgba(15, 23, 42, 0.85);
+
+  --color-primary: #38bdf8;
+  --color-secondary: #7dd3fc;
+  --color-text: #e5f0ff;
+  --color-muted: #94a3b8;
+
+  --border-glow: rgba(56, 189, 248, 0.25);
+  --shadow-glow: rgba(56, 189, 248, 0.5);
+
+  --radius: 14px;
+  --transition: 0.3s ease;
+}
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BASE ===== */
+body {
+  margin: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(56,189,248,0.15), transparent 40%),
+              radial-gradient(circle at 80% 30%, rgba(34,211,238,0.12), transparent 45%),
+              radial-gradient(circle at 50% 80%, rgba(99,102,241,0.12), transparent 45%),
+              linear-gradient(180deg, #020617, #020617);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+header {
+  background: var(--bg-header);
+  padding: 50px 20px;
+  text-align: center;
+  box-shadow: 0 0 25px var(--shadow-glow), 0 0 50px rgba(56,189,248,0.25);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glowing animation for header background */
+header::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #38bdf8, #7dd3fc, #0f172a, #38bdf8);
+  animation: moveGlow 8s linear infinite;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+@keyframes moveGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+header h1 {
+  font-size: 3rem;
+  letter-spacing: 3px;
+  color: black;
+  text-shadow: 0 0 10px #38bdf8, 0 0 20px #7dd3fc;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+header h1:hover {
+  transform: scale(1.05);
+  color: #7dd3fc;
+}
+
+header p {
+  opacity: 0.85;
+  color: var(--color-primary);
+  text-shadow: 0 0 5px #38bdf8;
+  position: relative;
+  z-index: 1;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+  background: var(--bg-nav);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px;
+  border-bottom: 1px solid var(--border-glow);
+  box-shadow: 0 0 15px rgba(56,189,248,0.2);
+  border-radius: 0 0 12px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width 0.3s ease, background 0.3s ease;
+  border-radius: 2px;
+}
+
+nav a:hover {
+  color: #7dd3fc;
+}
+
+nav a:hover::after {
+  width: 100%;
+  background: linear-gradient(90deg, #38bdf8, #7dd3fc);
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  margin-bottom: 50px;
+}
+
+.section h2 {
+  color: var(--color-secondary);
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius);
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.15);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 0 40px var(--shadow-glow);
+}
+
+/* ===== LISTS ===== */
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--bg-main);
+  text-align: center;
+  padding: 18px;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  border-top: 1px solid var(--border-glow);
+}
+
+/* style.css - Futuristic Blue Theme for HTML E-Library */
+:root {
+--main-bg: linear-gradient(135deg, #020617, #020f2f);
+--main-color: #e5f0ff;
+--highlight-color: #38bdf8;
+--accent-color: rgba(56,189,248,0.25);
+--code-bg: #020f2f;
+--code-color: #7dd3fc;
+--lesson-bg: rgba(15, 23, 42, 0.85);
+--result-bg: rgba(56,189,248,0.1);
+}
+
+
+body {
+font-family: "Segoe UI", Tahoma, sans-serif;
+background: var(--main-bg);
+color: var(--main-color);
+padding: 20px;
+}
+
+
+h1, h2, h3 {
+color: var(--highlight-color);
+}
+
+
+.lesson {
+background: var(--lesson-bg);
+border: 1px solid var(--accent-color);
+border-radius: 12px;
+padding: 20px;
+margin-bottom: 25px;
+box-shadow: 0 0 20px rgba(56,189,248,0.15);
+transition: transform 0.3s, box-shadow 0.3s;
+}
+.lesson:hover {
+transform: translateY(-5px);
+box-shadow: 0 0 25px rgba(56,189,248,0.35);
+}
+
+
+.lesson h3 {
+color: var(--highlight-color);
+margin-bottom: 10px;
+}
+
+
+.code {
+background: var(--code-bg);
+color: var(--code-color);
+padding: 10px;
+border-radius: 8px;
+font-family: monospace;
+overflow-x: auto;
+border: 1px solid var(--accent-color);
+}
+
+
+.result {
+background: var(--result-bg);
+padding: 10px;
+margin-top: 8px;
+border-radius: 8px;
+color: var(--main-color);
+border: 1px solid var(--accent-color);
+}
+
+
+.result h4 {
+margin: 0 0 5px 0;
+font-weight: normal;
+color: var(--highlight-color);
+}
+
+
+img {
+max-width: 150px;
+border-radius: 8px;
+border: 1px solid var(--accent-color);
+}
+
+
+input, button {
+padding: 5px 10px;
+margin-top: 5px;
+}

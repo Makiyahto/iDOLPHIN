@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML Quiz Game</title>
+  <link rel="stylesheet" href="e-li.css" />
+  <style>
+    .quiz-box {
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .choices button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56,189,248,0.4);
+      border-radius: 10px;
+      color: #e5f0ff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .choices button:hover {
+      background: rgba(56,189,248,0.2);
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #7dd3fc;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎮 HTML Quiz Game</h1>
+    <p>Test Your HTML Knowledge</p>
+  </header>
+
+  <div class="container">
+    <div class="card quiz-box">
+      <h2 id="question">Question here</h2>
+      <div class="choices">
+        <button onclick="checkAnswer('a')" id="a"></button>
+        <button onclick="checkAnswer('b')" id="b"></button>
+        <button onclick="checkAnswer('c')" id="c"></button>
+        <button onclick="checkAnswer('d')" id="d"></button>
+      </div>
+      <div class="result" id="result"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 E-Library | HTML Practice Game</p>
+  </footer>
+
+  <script>
+    const quiz = [
+  {question:"What does HTML stand for?",a:"Hyper Text Markup Language",b:"High Text Machine Language",c:"Hyperlink Text Making Language",d:"Home Tool Markup Language",correct:"a"},
+  {question:"Who is the inventor of HTML?",a:"Bill Gates",b:"Tim Berners-Lee",c:"Steve Jobs",d:"Mark Zuckerberg",correct:"b"},
+  {question:"Which tag is used for the largest heading?",a:"<head>",b:"<h6>",c:"<h1>",d:"<heading>",correct:"c"},
+  {question:"Which tag is used to create a paragraph?",a:"<p>",b:"<para>",c:"<paragraph>",d:"<pg>",correct:"a"},
+  {question:"Which tag creates a line break?",a:"<break>",b:"<br>",c:"<lb>",d:"<line>",correct:"b"},
+  {question:"Which tag is used to insert an image?",a:"<img>",b:"<image>",c:"<pic>",d:"<src>",correct:"a"},
+  {question:"Which attribute is used to show image source?",a:"href",b:"link",c:"src",d:"path",correct:"c"},
+  {question:"Which tag creates a hyperlink?",a:"<link>",b:"<href>",c:"<a>",d:"<url>",correct:"c"},
+  {question:"Which attribute opens link in new tab?",a:"new",b:"target=\"_blank\"",c:"open",d:"tab",correct:"b"},
+  {question:"Which tag is used for unordered list?",a:"<ol>",b:"<ul>",c:"<li>",d:"<list>",correct:"b"},
+  {question:"Which tag is used for ordered list?",a:"<ul>",b:"<list>",c:"<ol>",d:"<li>",correct:"c"},
+  {question:"Which tag defines a list item?",a:"<item>",b:"<li>",c:"<ul>",d:"<ol>",correct:"b"},
+  {question:"Which tag is used to create a table?",a:"<table>",b:"<tab>",c:"<tbl>",d:"<tr>",correct:"a"},
+  {question:"Which tag defines a table row?",a:"<td>",b:"<th>",c:"<tr>",d:"<row>",correct:"c"},
+  {question:"Which tag defines table data?",a:"<th>",b:"<td>",c:"<tr>",d:"<cell>",correct:"b"},
+  {question:"Which tag defines table header?",a:"<thead>",b:"<td>",c:"<tr>",d:"<th>",correct:"d"},
+  {question:"Which tag is used to create a form?",a:"<input>",b:"<form>",c:"<field>",d:"<submit>",correct:"b"},
+  {question:"Which input type hides text?",a:"text",b:"password",c:"hidden",d:"secure",correct:"b"},
+  {question:"Which tag creates a checkbox?",a:"checkbox",b:"<input type=checkbox>",c:"<check>",d:"<box>",correct:"b"},
+  {question:"Which tag creates a radio button?",a:"radio",b:"<radio>",c:"<input type=radio>",d:"<rbtn>",correct:"c"},
+  {question:"Which tag creates a button?",a:"<btn>",b:"<input>",c:"<button>",d:"<press>",correct:"c"},
+  {question:"Which tag is used for bold text?",a:"<strong>",b:"<b>",c:"Both A and B",d:"<bold>",correct:"c"},
+  {question:"Which tag is used for italic text?",a:"<em>",b:"<i>",c:"Both A and B",d:"<italic>",correct:"c"},
+  {question:"Which tag creates horizontal line?",a:"<line>",b:"<hr>",c:"<break>",d:"<hl>",correct:"b"},
+  {question:"Which tag is used for comments?",a:"// comment",b:"<!-- comment -->",c:"/* comment */",d:"# comment",correct:"b"},
+  {question:"Which tag defines document title?",a:"<meta>",b:"<head>",c:"<title>",d:"<header>",correct:"c"},
+  {question:"Which tag contains meta info?",a:"<body>",b:"<meta>",c:"<head>",d:"<footer>",correct:"c"},
+  {question:"Which tag is semantic?",a:"<div>",b:"<span>",c:"<header>",d:"<font>",correct:"c"},
+  {question:"Which tag is used for footer?",a:"<bottom>",b:"<footer>",c:"<end>",d:"<foot>",correct:"b"},
+  {question:"Which tag is used for navigation?",a:"<menu>",b:"<nav>",c:"<links>",d:"<navbar>",correct:"b"},
+  {question:"Which tag is used for sectioning content?",a:"<div>",b:"<section>",c:"<span>",d:"<article>",correct:"b"},
+  {question:"Which tag represents independent content?",a:"<section>",b:"<article>",c:"<div>",d:"<aside>",correct:"b"},
+  {question:"Which tag is inline?",a:"<div>",b:"<p>",c:"<span>",d:"<section>",correct:"c"},
+  {question:"Which tag is block-level?",a:"<span>",b:"<a>",c:"<img>",d:"<div>",correct:"d"},
+  {question:"Which attribute specifies image text?",a:"title",b:"alt",c:"name",d:"desc",correct:"b"},
+  {question:"Which tag embeds video?",a:"<media>",b:"<movie>",c:"<video>",d:"<vid>",correct:"c"},
+  {question:"Which tag embeds audio?",a:"<sound>",b:"<audio>",c:"<music>",d:"<mp3>",correct:"b"},
+  {question:"Which tag is used for iframe?",a:"<frame>",b:"<window>",c:"<iframe>",d:"<embed>",correct:"c"},
+  {question:"Which tag groups form fields?",a:"<group>",b:"<fieldset>",c:"<formset>",d:"<section>",correct:"b"},
+  {question:"Which attribute is required in img?",a:"src",b:"alt",c:"width",d:"height",correct:"a"},
+  {question:"Which tag is obsolete?",a:"<center>",b:"<header>",c:"<footer>",d:"<section>",correct:"a"},
+  {question:"Which HTML version is current?",a:"HTML4",b:"XHTML",c:"HTML5",d:"HTML6",correct:"c"},
+  {question:"Which tag defines main content?",a:"<content>",b:"<main>",c:"<body>",d:"<primary>",correct:"b"},
+  {question:"Which tag shows emphasized text?",a:"<em>",b:"<i>",c:"<mark>",d:"<strong>",correct:"a"},
+  {question:"Which tag highlights text?",a:"<em>",b:"<strong>",c:"<mark>",d:"<highlight>",correct:"c"},
+  {question:"Which attribute makes input required?",a:"needed",b:"required",c:"validate",d:"must",correct:"b"},
+  {question:"Which input type selects date?",a:"calendar",b:"day",c:"date",d:"time",correct:"c"}
+];
+
+    let current = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById("question");
+    const resultEl = document.getElementById("result");
+
+    function loadQuestion() {
+      const q = quiz[current];
+      questionEl.textContent = q.question;
+      document.getElementById("a").textContent = q.a;
+      document.getElementById("b").textContent = q.b;
+      document.getElementById("c").textContent = q.c;
+      document.getElementById("d").textContent = q.d;
+      resultEl.innerHTML = "";
+    }
+
+    function checkAnswer(answer) {
+      if (answer === quiz[current].correct) {
+        score++;
+        resultEl.innerHTML = "✅ Correct!";
+      } else {
+        resultEl.innerHTML = "❌ Wrong answer";
+      }
+
+      current++;
+
+      setTimeout(() => {
+        if (current < quiz.length) {
+          loadQuestion();
+        } else {
+          questionEl.innerHTML = "Game Over 🎉";
+          document.querySelector('.choices').innerHTML = "";
+          resultEl.innerHTML = `Your Score: ${score} / ${quiz.length}`;
+        }
+      }, 800);
+    }
+
+    loadQuestion();
+  </script>
+
+</body>
+</html>
