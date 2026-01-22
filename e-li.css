@@ -298,6 +298,17 @@ margin-top: 5px;
   transform: translateY(0);
   box-shadow: 0 6px 14px rgba(106, 92, 255, 0.3);
 }
+.lesson .result audio,
+.lesson .result video,
+.lesson .result iframe {
+  width: 250px; /* fixed width, maliit lang */
+  height: auto; /* proportional height */
+  display: block;
+  margin: 8px 0;
+}
+.lesson .result h4 {
+  margin-bottom: 10px;
+}
 
 
 
