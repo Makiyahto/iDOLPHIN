@@ -309,6 +309,20 @@ margin-top: 5px;
 .lesson .result h4 {
   margin-bottom: 10px;
 }
+.members p {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2563eb; /* highlight leader in blue */
+}
+
+.members ul {
+  list-style: disc inside;
+  padding-left: 0;
+}
+
+.members ul li {
+  margin: 4px 0;
+}
 
 
 
