@@ -181,12 +181,12 @@ li {
 
 /* ===== FOOTER ===== */
 footer {
-  background: var(--bg-main);
+  width: 100%;
+  background-color: var(--bg-main);
+  color: rgba(255, 255, 255, 0.8); /* or rgba(0,0,0,0.7) depende sa bg */
   text-align: center;
   padding: 18px;
   font-size: 0.9rem;
-  color: var(--color-muted);
-  border-top: 1px solid var(--border-glow);
 }
 
 /* style.css - Futuristic Blue Theme for HTML E-Library */
@@ -275,3 +275,4 @@ input, button {
 padding: 5px 10px;
 margin-top: 5px;
 }
+
