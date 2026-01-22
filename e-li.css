@@ -81,9 +81,9 @@ header h1:hover {
 }
 
 header p {
-  opacity: 0.85;
-  color: var(--color-primary);
-  text-shadow: 0 0 5px #38bdf8;
+  opacity: 1;
+  color: #ffffff;
+  text-shadow: 0 0 8px #0ea5e9, 0 0 15px #38bdf8;
   position: relative;
   z-index: 1;
   font-size: 1.2rem;
@@ -299,4 +299,5 @@ margin-top: 5px;
   transform: translateY(0);
   box-shadow: 0 6px 14px rgba(106, 92, 255, 0.3);
 }
+
 
