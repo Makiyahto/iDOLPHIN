@@ -275,4 +275,28 @@ input, button {
 padding: 5px 10px;
 margin-top: 5px;
 }
+.btn-play {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 12px 26px;
+  background: linear-gradient(135deg, #6a5cff, #8f7cff);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 20px rgba(106, 92, 255, 0.35);
+  transition: all 0.3s ease;
+}
+
+.btn-play:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(106, 92, 255, 0.5);
+  background: linear-gradient(135deg, #5a4cf0, #7a6cff);
+}
+
+.btn-play:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(106, 92, 255, 0.3);
+}
 
